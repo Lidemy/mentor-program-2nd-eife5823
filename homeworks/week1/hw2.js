@@ -3,7 +3,7 @@ function capitalize (str) {
   if (str[0]>='a' && str[0]<='z') {
      result += str[0].toUpperCase() + str.substr(1);  
   } else {   	
-     console.log(str);   
+     result += str;   
   }   
     return result; 
 }
