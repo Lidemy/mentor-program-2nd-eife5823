@@ -1,6 +1,6 @@
 function alphaSwap(str) {
   var result = '';
-  for (var i=1; i<=str.length; i++){
+  for (var i=0; i<str.length; i++){
   	if (str[i] >= 'a' && str[i] <= 'z') {
   		result += str[i].toUpperCase();
   	} else if (str[i] >= 'A' && str[i] <= 'Z') {
