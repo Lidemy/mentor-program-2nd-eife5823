@@ -12,6 +12,6 @@ function alphaSwap(str) {
   return result;
 }
 
-console.log(alphaSwap(nick));
+alphaSwap('nick');
 
 module.exports = alphaSwap
