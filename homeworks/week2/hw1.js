@@ -12,5 +12,5 @@ function stars(n) {
 	}
   return arr;
 }
-stars(4);
+stars();
 module.exports = stars;
