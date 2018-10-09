@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>仿google表單</title>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1" >
+	<style>
+		html {
+			margin: 0;
+		}
+		body {
+			margin: 0;
+			position: static;
+		}
+		.banner {
+			background-image: url('https://photo.16pic.com/00/47/60/16pic_4760725_b.jpg');
+			height:250px;			
+		}
+		.secondblock {
+			height: 1550px;
+			background-color: #CCEEFF;
+			z-index: 1
+		}
+		.content {
+			background-color: white;
+			position: absolute;
+			right: 440px;
+			top: 160px;
+			z-index: 2;
+			width: 600px;
+			height: 1550px;
+			border-top:10px solid orange;
+		}
+		h1 {
+			padding-left: 40px;
+			padding-right: 40px;
+			font-family: 微軟正黑體;
+			font-weight: normal;
+		}
+		p {
+			padding-left: 50px;
+			padding-right: 50px;
+			font-family: 微軟正黑體;
+			font-size: 18px;
+			font-weight: normal;
+		}
+		ul {
+			padding-left: 50px;
+			padding-right: 50px;
+		}
+		li {
+			list-style: none;
+			font-size: 24px;
+		}
+		input {
+			width: 350px;
+			height: 30px;
+			border:1px; 
+			border-bottom: 1px solid grey;
+			border-top-style: none;
+			border-left-style:none;
+			border-right-style:none;
+		}
+		.type {
+			width: 13px;
+			position: relative;
+			top:5px;
+		}
+
+		.block {
+			margin-top: 60px;
+			width: 500px;
+			padding: 5px;
+			
+		}
+		.box {
+			margin-top: 60px;
+			width: 500px;
+			padding: 5px;
+			
+		}
+		.classtype {
+			margin-top: 50px;
+		}
+		
+		.submit {
+			width: 100px; 
+			height: 40px;
+			margin-top: 30px;
+			margin-left: 50px;
+			color: white;
+			background-color: #0066FF;
+			border-radius:10px;
+			cursor: pointer;
+		}
+	
+	</style>
+</head>
+<body>
+  <div class="container">
+	<div class="banner"></div>
+  </div>
+  <div class="secondblock">
+  	<div class="content">
+  	  <div class="header">
+  		<h1>從零到一：程式導師實驗計畫報名表單</h1>
+  		<p>詳情請參考：<a href="https://medium.com/@hulitw/mentor-program-b5f96ae1eed1 ">https://medium.com/@hulitw/mentor-program-b5f96ae1eed1</a><br>
+        記得填完表單之後還要寫信報名才算成功，兩者缺一不可！<br><br>
+
+		<span style="font-size: 16px; color: red;">*必填</span>
+		</p>
+		<form>
+			<ul>
+				<li>
+					<div class="block">
+					  	電子郵件地址 <span style="color: red">*</span> <br>
+					  	<input type="text" class="required" placeholder="你的電子郵件"><br>
+					  	<div class="notice"></div>
+					</div>
+				</li>
+				<li>
+					<div class="block">
+					  	暱稱 <span style="color: red">*</span> <br>
+					  	<span style="font-size: 18px;">該如何稱呼你</span><br>
+					  	<input type="text" class="required" placeholder="你的回答"><br>
+					  	<div class="notice"></div>
+					</div>
+				</li>
+				<li>
+					<div class="box">
+					報名類型 <span style="color: red">*</span> <br><br>
+					<input class="type" id="type1" type="radio" name="signup">工程師培養班（每週付出四十小時，從零培養到工程師，學費是一個月薪水）<br><br>
+					<input class="type" id="type2" type="radio" name="signup"> 		
+					業餘班（依照個人目標訂立學習計畫，學費一萬五千元）<br>
+					<div class="notice1"></div>	
+					</div>
+				</li>
+				<li>
+					<div class="block">
+						是否有相關程式背景<span style="color: red">*</span> <br>
+						<span style="font-size: 18px;">範例：無、高中時候學過C++、學過一點網頁前端、目前在資策會上課...</span><br>	
+						<input type="text" class="required" placeholder="你的回答"><br>
+						<div class="notice"></div>
+					</div>
+				</li>
+				<li>
+					<div class="block">
+						其他<br>	
+						<span style="font-size: 18px;">其他任何你想講的</span><br>
+						<input type="text" class="others" placeholder="你的回答">
+					</div>
+				</li>
+			</ul>
+			<div>
+				<input class="submit" type="submit" name="submit">	
+			</div>
+		</form>
+  	  </div>			
+  	</div>
+  </div>
+  <script>
+  	   document.querySelector('form').addEventListener('submit', e => { 
+  	   	let type1 = document.getElementById('type1');
+  	   	let type2 = document.getElementById('type2'); 
+  	   	let others = document.getElementsByClassName('others');
+  	   	
+      	for (let i=0; i<3; i++) {
+      		var req = document.querySelectorAll('.required');
+      		if (req[i].value === '') { 
+      			document.querySelectorAll('.notice')[i].innerHTML = '<div style="color:red;margin-top:5px; font-size:18px">這是必填問題</div>' ;
+      			document.querySelectorAll('.block')[i].style.background = "#FFCCCC";
+      			e.preventDefault();
+      		} else if (req[i].value !== '') {
+      			document.querySelectorAll('.notice')[i].innerHTML = '<div style="color:red;margin-top:5px; font-size:18px"></div>' ;
+      			document.querySelectorAll('.block')[i].style.background = "white";
+      		}
+       }
+       if (!type1.checked && !type2.checked) {
+      			document.querySelector('.notice1').innerHTML = '<div style="color:red;margin-top:5px; font-size:18px">這是必填問題</div>' ;
+      			document.querySelector('.box').style.background = "#FFCCCC";
+      			e.preventDefault();
+      	} else {
+      			document.querySelector('.notice1').innerHTML = '<div style="color:red;margin-top:5px; font-size:18px"></div>' ;
+      			document.querySelector('.box').style.background = "white";
+      	}		   	
+       if (req[0].value !== '' && req[1].value !== '' && req[2].value !== '' && type1.checked !== 0 && type2.checked !== 0) {
+       			console.log(req[0].value);
+       			console.log(req[1].value);
+       			console.log(req[2].value);
+       			console.log('type1: ' + type1.checked);
+       			console.log('type2: ' + type2.checked);
+       			console.log(others.value);
+       			alert('提交成功!');
+
+       }	
+       });
+      	
+  </script>
+</body>
+</html>

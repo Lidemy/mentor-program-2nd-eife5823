@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Eife's Calculator</title>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1" >
+	<style>
+	  	html {
+	  		margin:0;
+	  	}
+	  	body {
+	  		margin:0;
+	  	}
+	  	.calculator {
+	  		width: 550px;
+	  		height: 400px;
+	  		margin: 50px auto;
+	  		border: 1px solid grey;
+
+	  	}
+	  	.keys {
+	  		width: 530px;
+	  		height: 300px;
+	  		margin: 0 auto;
+	  	}
+		h1 {
+			font-size: 60px;
+			width: 510px;
+			height: 70px;
+			margin: 20px 20px;
+			text-align: right;
+			border:1px solid grey;	
+		}
+
+		.number {
+			font-size: 30px;
+			background-color: white;
+			display: inline-flex;
+			border: 1px solid grey;
+			width: 110px;
+			height: 40px;
+			margin:5px 10px;
+			justify-content: center;
+			align-content: center;
+			cursor: pointer;
+		}
+		.op {
+			font-size: 30px;
+			background-color: white;
+			display: inline-flex;
+			border: 1px solid grey;
+			width: 110px;
+			height: 40px;
+			margin:5px 10px;
+			justify-content: center;
+			align-content: center;
+			cursor: pointer;
+		}
+		#sum {
+			width: 241px;
+			background-color: orange;
+		}
+
+		.firstrow {
+			display: flex;
+			justify-content: space-between;
+		}
+		.secondrow {
+			display: flex;
+			justify-content: space-between;
+		}
+		.thirdrow {
+			display: flex;
+			justify-content: space-between;
+		} 
+		.forthrow {
+			display: flex;
+			justify-content: space-between;
+		}
+		.lastrow {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		
+		
+	</style>
+
+</head>
+<body>
+  <div class="calculator">	
+	<h1 class="answer"></h1>
+	<div class="keys">
+	  <div class="firstrow">
+	  	<button class="op AC">AC</button> 
+	  	<button class="op divide">÷</button> 
+	  </div>
+	  <div class="secondrow">	
+		<button class="number number7">7</button>
+		<button class="number number8">8</button>
+		<button class="number number9">9</button>
+		<button class="op multiply">x</button> 
+      </div>
+      <div class="thirdrow">			
+		<button class="number number4">4</button>
+		<button class="number number5">5</button>
+		<button class="number number6">6</button>
+		<button class="op minus">-</button> 
+	  </div>
+	  <div class="forthrow">	
+		<button class="number number1">1</button>
+		<button class="number number2">2</button>
+		<button class="number number3">3</button>
+		<button class="op plus">+</button> 
+	  </div>
+	  <div class="lastrow">	
+		<button class="number number0">0</button>
+	    <button class="number number.">.</button>
+		<button id="sum" class="op sum">=</button>	
+	  </div>
+	</div>  
+  </div>
+  <script type="text/javascript">
+  	  let firstNumber = null;
+  	  let secondNumber = null;
+  	  let operator = null;	
+
+  	  for (let i=0; i<=9; i++) {
+  	  	document.querySelector('.number' + i).addEventListener ('click', function() {
+           clickNumber(i);
+  	  	});
+  	  }
+
+  	  document.querySelector('.op.plus').addEventListener ('click', function () {
+        handleOperator('+');
+  	  });
+  	  document.querySelector('.op.minus').addEventListener ('click', function () {
+        handleOperator('-');
+  	  });
+  	  document.querySelector('.op.sum').addEventListener ('click', function () {
+        handleOperator('=');
+  	  });
+
+  	  document.querySelector('.op.AC').addEventListener ('click', function () {
+        handleOperator('AC');
+  	  });
+
+  	  function handleOperator (op) {
+        if (op === '=') {
+        	  secondNumber = Number(saveAnswer());
+        	  if (operator === '+') {
+        	  	setAnswer(firstNumber + secondNumber);
+        	  } else if (operator === '-') {
+        	  	setAnswer(firstNumber - secondNumber);
+        	  } else { 
+        	  	setAnswer('');
+        	  }
+
+        } else {
+              firstNumber = Number(saveAnswer());
+        	  setAnswer('');
+        	  operator = op;      	
+        }
+  	  }
+
+  	  function clickNumber (num) {
+  	  		appendAnswer(num); 
+  	  }
+  	  
+
+  	  function setAnswer (str) {
+  	    document.querySelector('.answer').innerText = str;	
+  	  }
+  	   function appendAnswer (str) {
+  	   	document.querySelector('.answer').innerText += str;
+  	   }
+  	 
+  	 function saveAnswer () {
+  	 	return document.querySelector('.answer').innerText;
+  	 }
+  	  
+		
+    </script>	
+</body>
+
+</html>
