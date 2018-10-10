@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LoL實況</title>
+	<meta charset="utf-8" />
+	<style>
+		body {
+			background-image: url('http://img.dwstatic.com/lol/1610/341582105456/341582954497.jpg');
+			background-size: 1460px 2150px;
+			margin: 0;
+		}
+		.preview__Viewers {
+			width: 350px;
+			margin: 10px;
+			background-color: #5b5b5b;
+			border: 2px solid black;
+			display: inline-block;
+			position: relative;
+			left: 170px;
+		}
+		.preview__logo {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			margin-right: 0px;
+			position: absolute;
+			left: 5px;
+			display: inline-block;
+		}
+		.preview__logo > img {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+		}
+		.preview__info {
+			width: 350px;
+			height: 80px;
+			position: relative;
+
+		}
+		.preview__liveImg > img {
+			width: 350px;
+		}
+		.preview__liveImg{
+			display: block;
+		}
+		.preview__NameAndTitles {
+			width: 280px;
+			height: 70px;
+			position: absolute;
+			bottom: 3px;
+			left: 50px;
+			font-size: 14px;
+			color: white;
+			z-index: 1;
+			padding: 5px;
+
+		}
+	</style>
+	<script type="text/javascript">
+		function getTwitchLive(){
+			let req = new XMLHttpRequest();
+			req.open('GET', 'https://api.twitch.tv/kraken/streams/?game=League%20of%20Legends&limit=20'); //發出request
+			req.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json');
+			req.setRequestHeader('Client-ID', 'oj1h9lgop9pvlqd3ilgvst11v6o8qm');
+			req.onload = () => {
+				if (req.status >= 200 && req.status <400) {
+					let resp = JSON.parse(req.responseText); //把傳回值當字串使用並將JSON字串轉成JS數值或物件
+					console.log(resp);
+					resp.streams.forEach((element, index, array) =>{
+						let previewInfo = document.createElement("div");
+						previewInfo.classList.add("preview__info");
+
+						let previewViewer = document.createElement("div");
+						previewViewer.classList.add("preview__Viewers");
+
+						let previewLogo = document.createElement("div");
+						previewLogo.classList.add("preview__logo");
+						let logo = document.createElement("img");
+						logo.setAttribute("src", resp.streams[index].channel.logo); // 取到logo資料
+						previewLogo.appendChild(logo); //將logo加入previewLogo中
+
+						let previewLiveImg = document.createElement("div");
+						previewLiveImg.classList.add("preview__liveImg");
+						let liveImg = document.createElement("img");
+						liveImg.setAttribute("src", resp.streams[index].preview.medium); // 取到直播畫面資料
+						previewLiveImg.appendChild(liveImg); // 將直播畫面加入previewLiveImg中
+
+						let previewNameAndTitle = document.createElement("div");
+						previewNameAndTitle.classList.add("preview__NameAndTitles");
+
+						let previewTitle = document.createElement("div");
+						previewTitle.innerText = resp.streams[index].channel.status;
+						previewTitle.classList.add("preview__title");
+
+						let previewName = document.createElement("div");
+						previewName.innerText = resp.streams[index].channel.display_name;
+						previewName.classList.add("preview__name");
+
+						previewNameAndTitle.appendChild(previewTitle);
+						previewNameAndTitle.appendChild(previewName);
+						previewInfo.appendChild(previewLogo);
+						previewInfo.appendChild(previewNameAndTitle);
+						previewViewer.appendChild(previewLiveImg);
+						previewViewer.appendChild(previewInfo);
+						document.querySelector(".preview").appendChild(previewViewer); // 將所有東西放入preview class中
+					});
+				}
+			}
+			req.send(); //發出request
+
+		}
+	</script>
+</head>
+<body onload="getTwitchLive()">
+	<div class="preview"></div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div class="title">123</div>
+
+<script type="text/javascript">
+
+	function q(selector){
+		let element = document.querySelector(selector);
+		let obj = {
+			  hide: function(){
+				element.style.display = 'none'; // 只能加一個等於
+				},
+			  show: function(){
+				element.style.display = '';
+				}	
+			}
+		return obj;	
+		} 
+	
+	let element = q(".title");
+	element.hide();				
+
+
+	
+	
+</script>
+</body>
+</html>
