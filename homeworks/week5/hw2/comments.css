@@ -1,0 +1,123 @@
+		
+		body {
+			background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7Q_hyauob6_s9fUQD4pX2GoGyN3E-yqpojdTLiNf_nZuSIHND7Q);
+			background-size: cover;
+		}
+		.container {
+			width: 700px;
+			height: 2000px;
+			margin:0 auto;
+			background-color: #FFBB66;
+			border-radius: 10px;
+			
+		}
+		.msg_container {
+			padding: 5px;
+		}
+		.old_reply {
+			margin-top: 15px;
+			padding: 15px;
+			position: relative;
+		}
+		header {
+			font-size: 40px;
+			font-weight: bold;
+			padding: 10px;
+		}
+		.new_reply {
+			padding: 15px;
+		}
+		.nickname {
+			width: 300px;
+			height: 30px;
+			display: inline-block;
+			font-size: 18px;
+			border-radius: 10px;
+			font-weight: bold;
+		}
+		.subNickname {
+			width: 300px;
+			height: 30px;
+			display: inline-block;
+			font-size: 18px;
+			border-radius: 10px;
+			font-weight: bold;
+		}
+		span {
+			font-size: 16px;
+		}
+		.comments {
+			width: 600px;
+			height: 70px;
+			margin-top: 10px;
+			border-radius: 10px;
+			font-size: 16px;
+		}
+		.child__input-comments {
+			width: 580px;
+			height: 70px;
+			margin-top: 10px;
+			border-radius: 10px;
+			font-size: 16px;
+		}
+		.subComments {
+			width: 600px;
+			height: 80px;
+			margin-top: 10px;
+			border-radius: 10px;
+			font-size: 16px;
+		}
+		.header {
+			border-bottom: 1px solid #AAAAAA;
+			padding-bottom: 5px;
+			display: flex;
+		}
+		p {
+			margin-top: 10px;
+			font-size: 20px;
+		}
+		.child_reply {
+			width: 600px;
+			height: 80px;
+		    margin-top: 5px;
+		    margin-left: 10px;
+			padding: 5px;
+			background-color: #CCEEFF;
+			border-radius: 10px;
+
+		}
+		.childform {
+			width: 600px;
+			padding: 5px;
+			background-color: #CCEEFF;
+			border-radius: 10px;
+			margin-top: 10px;
+			margin-left: 10px;
+		}
+		.child_comment {
+			width: 600px;
+			height: 70px;
+			margin-top: 10px;
+		}
+		.submit {
+			border-radius: 10px;
+			background-color: #009FCC;
+			font-size: 16px;
+			font-weight: bold;
+			width: 80px;
+			height: 30px;
+		}
+		ul {
+			font-size: 20px;
+		}
+		.timestamp {
+			font-size: 18px;
+			color: black;
+			justify-content: space-between;
+
+		}
+		.subTimestamp {
+			font-size: 18px;
+			color: black;
+			justify-content: space-between;
+		}
