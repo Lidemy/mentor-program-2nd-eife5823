@@ -97,13 +97,13 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['nick
 	$username = $_POST['username'];
 	$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 	$nickname = $_POST['nickname'];
-	$stmt = $conn->prepare("SELECT * FROM users WHERE username = ? or password= ? "); //判斷 username 及 nickname 是否在資料庫裡有重複
+	$stmt = $conn->prepare("SELECT * FROM eife_users WHERE username = ? or password= ? "); //判斷 username 及 nickname 是否在資料庫裡有重複
 	$stmt->bind_param("ss", $username, $password);
 	$stmt->execute();
 	$result = $stmt->get_result(); //執行 sql
 	$row = $result->fetch_assoc();
 	if ($result->num_rows <= 0){
-		$new_users = "INSERT INTO users (username,password,nickname) VALUES ('$username', '$password', '$nickname')";
+		$new_users = "INSERT INTO eife_users (username,password,nickname) VALUES ('$username', '$password', '$nickname')";
 		$conn->query($new_users) or die('error'); //若無法插入顯示錯誤
 		header('Location: login.php');	
 	} else {

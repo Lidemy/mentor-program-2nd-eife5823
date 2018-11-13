@@ -5,7 +5,7 @@
 	if (isset($_POST['content']) && !empty($_POST['content'])) {
 		$content = $_POST['content'];
 		$post_id = $_POST['post_id'];
-		$stmt = $conn->prepare("UPDATE comments SET content = '$content' WHERE post_id = $post_id");
+		$stmt = $conn->prepare("UPDATE eife_comments SET content = '$content' WHERE post_id = $post_id");
 		if ($stmt->execute() === TRUE) {
 			header('Location: comments.php');
 		} else {

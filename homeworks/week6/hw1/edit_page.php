@@ -53,7 +53,7 @@
 	/* 取得 username */
 	if(isset($_COOKIE["session_id"]) && !empty($_COOKIE["session_id"])) {
 	$session_id = $_COOKIE["session_id"];
-	$stmt =  $conn->prepare("SELECT * FROM users_certificate WHERE s_id = ?");
+	$stmt =  $conn->prepare("SELECT * FROM eife_certificate WHERE s_id = ?");
 	$stmt->bind_param("s", $session_id );
 	$stmt->execute();
 	$check_login= $stmt->get_result(); //執行 sql
@@ -63,7 +63,7 @@
     	echo 'Error: ' . $stmt . '<br>' . $conn->error;
     }
     /* 取得暱稱 */
-	$get_users = $conn->prepare("SELECT * FROM users WHERE username = '$user' "); 
+	$get_users = $conn->prepare("SELECT * FROM eife_users WHERE username = '$user' "); 
 	$get_users->execute();
 	$get_users_result = $get_users->get_result();
 	if ($get_users_result->num_rows > 0) {
