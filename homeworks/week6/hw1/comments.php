@@ -16,7 +16,7 @@
 		  if(isset($_COOKIE["session_id"]) && !empty($_COOKIE["session_id"])) {
 		  	$session_id = $_COOKIE["session_id"];
 		  	$login = true;
-		  	$stmt =  $conn->prepare("SELECT * FROM users_certificate WHERE s_id = ?");
+		  	$stmt =  $conn->prepare("SELECT * FROM eife_certificate WHERE s_id = ?");
 		  	$stmt->bind_param("s", $session_id );
 		  	$stmt->execute();
 		  	$check_login= $stmt->get_result(); //執行 sql
@@ -28,19 +28,22 @@
 		  		$check_login_row = $check_login->fetch_assoc();
 		  		$user = $check_login_row['username'];
 		  	}
-		 } 	
+		 } else {
+		 		$user = null;
+		  		$login = false;
+		 }	
 		?>
 		<ul>
 			<?php
-			if($login = false) {
+			if($login == false) {
 				echo '<li><a href="login.php">登入</a></li>';}
 			?>
 			<?php
-			if($login = false) {
+			if($login == false) {
 				echo '<li><a href="register.php">註冊</a></li>';}
 			?>
 			<?php
-			if($login = true) {
+			if($login == true) {
 				echo '<li><a href="logout.php">登出</a></li>';}
 			?>
 		</ul>
@@ -54,7 +57,7 @@
 			$page = intval($_GET['page']); //必須設定數值才抓的到 $_GET 的值
 		}
 	    $start = ($page-1)*$per; //每頁從第幾筆留言開始
-		$count_reply = $conn->prepare("SELECT COUNT(*) as sum FROM comments WHERE parent_id = 0 ");  //主留言總筆數
+		$count_reply = $conn->prepare("SELECT COUNT(*) as sum FROM eife_comments WHERE parent_id = 0 ");  //主留言總筆數
 		$count_reply->execute(); //執行 sql
 		$count_result = $count_reply->get_result(); 
 		if($count_result->num_rows > 0) {
@@ -69,15 +72,13 @@
 
 		/* 分頁設定結束 */
 
-		$get_users = $conn->prepare("SELECT * FROM users WHERE username = '$user' "); //取得暱稱
+		$get_users = $conn->prepare("SELECT * FROM eife_users WHERE username = '$user' "); //取得暱稱
 		$get_users->execute();
 		$get_users_result = $get_users->get_result();
 		if ($get_users_result->num_rows > 0) {
 			$row_get_users = $get_users_result->fetch_assoc();
 			$nickname = $row_get_users['nickname'];
-		} else {
-			echo 'Error: ' . $get_users . '<br>' . $conn->error;
-		}
+		} 
 		?>
 	<div class="new_reply">
 	  <form action="new_reply.php" method="POST">
@@ -94,7 +95,7 @@
 	</div>
 
 		<?php 
-		$showOnPage = "SELECT comments.post_id, comments.user_id, comments.content, users.nickname, users.username, comments.created_at FROM comments LEFT JOIN users ON comments.user_id = users.id WHERE parent_id = 0 ORDER BY created_at DESC LIMIT $start, $per"; //利用join合併兩張table的id，並取到需要的資料
+		$showOnPage = "SELECT eife_comments.post_id, eife_comments.user_id, eife_comments.content, eife_users.nickname, eife_users.username, eife_comments.created_at FROM eife_comments LEFT JOIN eife_users ON eife_comments.user_id = eife_users.id WHERE parent_id = 0 ORDER BY created_at DESC LIMIT $start, $per"; //利用join合併兩張table的id，並取到需要的資料
 		$result_page = $conn->query($showOnPage) or die($conn->error);
 		if ($result_page->num_rows > 0) {
 			while($row = $result_page->fetch_assoc()){
@@ -125,7 +126,7 @@
 				
 		<?php					 	  
 				 //這邊必須使用 post id 去篩選是對哪個主留言做回應，否則會有子留言重複出現的情況				
-				 $childReply = 'SELECT comments.user_id, comments.post_id, comments.content, users.nickname, users.username, comments.created_at FROM comments LEFT JOIN users ON comments.user_id = users.id WHERE parent_id = ' . $row['post_id'] . ' ORDER BY created_at DESC'; 	//撈取子留言
+				 $childReply = 'SELECT eife_comments.user_id, eife_comments.post_id, eife_comments.content, eife_users.nickname, eife_users.username, eife_comments.created_at FROM eife_comments LEFT JOIN eife_users ON eife_comments.user_id = eife_users.id WHERE parent_id = ' . $row['post_id'] . ' ORDER BY created_at DESC'; 	//撈取子留言
 	   			 $result_child = $conn->query($childReply) or die($conn->error);
 	    		 if ($result_child->num_rows > 0) {
 	      			while ($row_child = $result_child->fetch_assoc()) {

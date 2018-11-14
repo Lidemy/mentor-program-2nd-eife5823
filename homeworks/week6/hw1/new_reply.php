@@ -10,7 +10,7 @@
 
 		/*利用 nickname 抓出 user id*/
 		$nickname = $_POST['nickname'];
-		$get_users = $conn->prepare("SELECT * FROM users WHERE nickname = '$nickname'");
+		$get_users = $conn->prepare("SELECT * FROM eife_users WHERE nickname = '$nickname'");
 		$get_users->bind_param("s", $session_id);
 		$get_users->execute();
 		$result_users = $get_users->get_result();
@@ -21,7 +21,7 @@
 			$user_id = $row_users["id"];
 		}
 	
-		$reply_sql = $conn->prepare("INSERT INTO comments (user_id, parent_id, content) VALUES (?,?,?)");
+		$reply_sql = $conn->prepare("INSERT INTO eife_comments (user_id, parent_id, content) VALUES (?,?,?)");
 		$reply_sql->bind_param("sss", $user_id, $parent_id, $content);
 
 		if ($reply_sql->execute() === TRUE) {

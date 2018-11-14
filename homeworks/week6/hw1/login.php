@@ -104,7 +104,7 @@
 			$username = $_POST['username'];
 			$password = password_verify($_POST['password']);
 
-			$stmt = $conn->prepare("SELECT * FROM users WHERE username = ? or password= ? "); //解決 SQL Injection 
+			$stmt = $conn->prepare("SELECT * FROM eife_users WHERE username = ? or password= ? "); //解決 SQL Injection 
 			$stmt->bind_param("ss", $username, $password);
 			$stmt->execute();
 			$result = $stmt->get_result(); //執行 sql
@@ -112,9 +112,9 @@
 
 			if ($result->num_rows > 0) {
 				$session_id = uniqid();
-				$sql = "DELETE FROM users_certificate WHERE username = '$username'";
+				$sql = "DELETE FROM eife_certificate WHERE username = '$username'";
 				$conn->query($sql) or die('error');
-				$sql = "INSERT INTO users_certificate (s_id, username) VALUES ('$session_id', '$username')";
+				$sql = "INSERT INTO eife_certificate (s_id, username) VALUES ('$session_id', '$username')";
 				$conn->query($sql) or die('error');
 				setcookie("session_id", $session_id, time()+3600*24);
 				header('Location: comments.php');
