@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo List</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<style type="text/css">
+
+		.container {
+			margin-top: 30px;
+		}
+		.list-group {
+			margin: auto;
+			width: 700px;
+			position: relative;
+		}
+		.btn {
+			display: inline-flex;
+			justify-content: space-between;
+			margin-left: 5px;
+		}
+		.list-btn {
+			display: inline-flex;
+			position: absolute;
+			right: 20px;
+			bottom: 5px;
+		}
+
+	</style>
+</head>
+<body>
+ <div class="container">
+ 	<div class="row">
+ 	
+		</div>
+ 		<ul class="list-group">
+ 		  <div class="input-group mb-3">
+ 		    <input type="text" class="form-control" placeholder="Add New Todo">
+ 		    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Add</button>
+ 		  </div>
+		</ul>
+ 		
+ 	</div>
+ 	
+ </div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+	$(document).ready(() => {
+		$('#button-addon2').on('click', (e) => { // 指向目前發生 click 事件的 button，即 Add
+			if($('.form-control').val() !== '') { // todo 不可是空字串
+				const todo = $('.form-control').val(); // 抓到 todo 輸入框的 value
+			    addTodo(todo);
+			} else {
+				alert('please add todo');
+			}		
+		});
+		
+		$('.list-group').on('click', (e) => { // 利用事件代理，在父節點處理子節點事件
+			if (e.target.className === 'btn btn-danger') {
+				$(e.target).parent().parent().remove();
+			};
+		});
+
+		$('.list-group').on('click', (e) => { 
+			if (e.target.className === 'btn btn-success') {
+				$(e.target).parent().parent().addClass('list-group-item-success'); //將已完成todo背景變綠色
+				$(e.target).addClass('todoUndone'); //加上一個undone class
+				$(e.target).text('Undone');
+			} else {
+				$(e.target).parent().parent().removeClass('list-group-item-success'); //將未完成todo背景變回白色
+				$(e.target).removeClass('todoUndone'); //remove undone class
+				$(e.target).text('Done');		
+			};
+		});
+
+	}); 
+
+
+	function addTodo (value) {
+		const newTodo = getTodoHTML(value);
+		$('.form-control').val(''); // 將 todo value 清空
+		$('.list-group').append(newTodo);
+	}
+
+	function getTodoHTML (value) { // 新增 new todo 的 function
+		return  `<li class="list-group-item">${value}
+		  	  		<div class="list-btn">
+		  	  			<button type="button" class="btn btn-danger" id="delete">Delete</button>
+  						<button type="button" class="btn btn-success">Done</button>
+		  	  	    </div>	
+		  	     </li>`;
+	}
+
+</script>
+</body>
+</html>
