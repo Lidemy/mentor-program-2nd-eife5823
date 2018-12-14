@@ -1,8 +1,8 @@
 <?php 
-$servername = "localhost";
-$username = "root";
-$password = "29555823";
-$dbname = "mentor";
+$servername = "";
+$username = "";
+$password = "";
+$dbname = "";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 $conn->query("SET NAMES 'UTF8'");
