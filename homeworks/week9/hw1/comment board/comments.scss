@@ -1,0 +1,254 @@
+$primary-color: #707C74;
+$second-color: #69B0AC;
+$third-color: #9F353A;
+
+body {
+	background-color: $primary-color;
+}
+.container {
+			width: 1000px;
+			height: 100%;
+			margin: 20px auto;
+			background-color: #D7B98E;
+			border-radius: 10px;
+			position: relative;
+		   }
+/*導覽列*/
+header  { 
+			font-size: 40px;
+			font-weight: bold;
+			padding: 10px;
+			width: 100%;
+			
+			ul {
+			font-size: 20px;
+			}
+		}
+/*主留言*/				   
+.old_reply {
+			width: 70%;
+			margin: 15px auto;
+			padding: 15px;
+			position: relative;
+
+			.delete_main { //刪除主留言
+				font-size: 16px;
+				display: inline-flex;
+				position: absolute;
+				top: 2px;
+				left: 710px;
+				border-radius: 10px;
+				outline: none;
+				background-color: #D7C4BB;
+				font-weight: bold;
+				padding: 3px;
+				color: black;
+				border: 2px solid grey;
+				cursor: pointer;
+			}
+			.edit_main { //編輯主留言
+				font-size: 16px;
+				display: inline-flex;
+				position: absolute;
+				top: 2px;
+				left: 640px;
+				border-radius: 10px;
+				outline: none;
+				background-color: #D7C4BB;
+				font-weight: bold;
+				padding: 3px;
+				color: black;
+				border: 2px solid grey;
+				cursor: pointer;
+			}
+		   }
+/*新增主留言*/
+.new_reply {
+				padding: 15px;
+				width: 70%;
+				margin: 30px auto;
+				background-color: $second-color;
+				border-radius: 10px;
+		   }
+
+
+/*主留言內容*/		     
+.comments {
+			width: 100%;
+			height: 90px;
+			margin-top: 10px;
+			border-radius: 10px;
+			font-size: 16px;
+		  }	
+/*子留言內容*/		   
+.child__input-comments {	width: 100%;
+							height: 70px;
+							margin-top: 10px;
+							border-radius: 10px;
+							font-size: 16px;
+						}
+/*子留言內容*/						
+.subComments {
+				width: 600px;
+				height: 80px;
+				margin-top: 10px;
+				border-radius: 10px;
+				font-size: 16px;
+		    }
+/*留言header*/		    
+.header {
+			border-bottom: 1px solid #AAAAAA;
+			padding-bottom: 5px;
+			display: flex;
+
+			.timestamp { //主留言日期
+				font-size: 18px;
+				color: black;
+				position: absolute;
+				left: 210px;
+			}	   
+			.nickname { //主留言暱稱
+				height: 30px;
+				display: inline-block;
+				font-size: 18px;
+				border-radius: 10px;
+				font-weight: bold;
+			}
+			.subTimestamp { //子留言日期
+				font-size: 18px;
+				position: absolute;
+				left: 200px;
+			}		  
+			.subNickname { //子留言暱稱
+				width: 300px;
+				height: 30px;
+				display: inline-block;
+				font-size: 18px;
+				border-radius: 10px;
+				font-weight: bold;
+			}
+		}
+/*子留言區塊*/
+.child_reply {
+				position: relative;
+				width: 70%;
+				height: 120px;
+			    margin: 10px auto;
+				padding: 5px;
+				background-color: $second-color;
+				border-radius: 10px;
+				color: white;
+
+		     }
+/*子留言變色區塊*/		     
+.changeColor {
+				position: relative;
+				width: 70%;
+				height: 120px;
+			    margin: 10px auto;
+				padding: 5px;
+				background-color: $third-color;
+				border-radius: 10px;
+				color: white;
+		     }
+/*新增子留言*/		     		     
+.childform {
+				width: 70%;
+				padding: 15px;
+				background-color: $second-color;
+				border-radius: 10px;
+				margin: 20px auto;
+		   }
+.btn-outline-info, .btn-outline-danger, .btn-outline-warning {
+																font-size: 16px !important; 
+																font-weight: bold !important;
+																padding: 3px 10px !important;
+															}
+
+/*刪除子留言*/		
+.delete_sub {
+			font-size: 16px;
+			display: inline-flex;
+			position: absolute;
+			top: 5px;
+			right: 10px;
+			border-radius: 10px;
+			font-weight: bold;
+			padding: 3px;
+			cursor: pointer;
+  			}
+/*編輯子留言*/ 					
+.edit_child {
+			font-size: 16px;
+			display: inline-flex;
+			position: absolute;
+			top: 5px;
+			right: 80px;
+			border-radius: 10px;
+			outline: none;
+			font-weight: bold;
+			padding: 3px;
+			cursor: pointer;
+			}		
+		
+.page {
+			text-align: center;
+			z-index: 2;
+			padding: 5px;
+			position: relative;
+			top: 30px;
+
+			a {
+				margin-left: 5px;
+			}
+	  }		
+@media screen and (max-width:992px) {
+			.delete_main {
+				position: absolute;
+				top: 10px;
+				left: 500px;
+			}
+			.edit {
+				&_main {
+					position: absolute;
+					top: 10px;
+					left: 415px;
+				}
+				&_child {
+					position: absolute;
+					top: 40px;
+					right: 10px;
+				}
+			}
+			
+		}
+@media screen and (max-width:772px) {
+			.delete {
+					&_main {
+						position: absolute;
+						top: 10px;
+						left: 350px;
+					}
+					&_sub {
+						top: 5px;
+						left: 360px;
+					}
+				
+			}
+			.edit {
+					&_main {
+						position: absolute;
+						top: 50px;
+						left: 350px;
+					}
+					&_child {
+						position: absolute;
+						top: 45px;
+						left: 360px;
+					}
+				
+			}
+}		
+
+		
+		
