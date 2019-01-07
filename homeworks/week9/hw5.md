@@ -4,9 +4,11 @@
 
 2. CSS 預處理器並不是必要一定要會的，沒有使用 CSS 預處理器也可以寫出 CSS。 但在追求工作效率以及易於維護的考量下，使用還是比較方便。
 
+
 ## 請舉出任何一個跟 HTTP Cache 有關的 Header 並說明其作用。
 
-`Expires` : 可以在 HTTP Response Header 裡加上`Expires`標示這個 Cache 到期的時間，來決定瀏覽器是否重新發送 request，或是直接從 Cache 拿資料就好。
+`Expires` : 可以在 HTTP Response Header 裡加上`Expires`標示這個 Cache 到期的時間，來決定瀏覽器是否重新發送 request，或是直接從 Cache 拿資料就好。  
+
 
 ## Stack 跟 Queue 的差別是什麼？
 

@@ -1,0 +1,22 @@
+.container {
+  margin-top: 30px;
+}
+
+.list-group {
+  margin: auto;
+  width: 700px;
+  position: relative;
+}
+.list-btn {
+  display: inline-flex;
+  justify-content: space-between;
+  margin-left: 5px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: space-between;
+  margin-left: 5px;
+}
+
+/*# sourceMappingURL=todo.css.map */
