@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo List</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<style type="text/css">
+
+		.container {
+			margin-top: 30px;
+		}
+		.list-group {
+			margin: auto;
+			width: 700px;
+			position: relative;
+		}
+		.btn {
+			display: inline-flex;
+			justify-content: space-between;
+			margin-left: 5px;
+		}
+		.list-btn {
+			display: inline-flex;
+			position: absolute;
+			right: 20px;
+			bottom: 5px;
+		}
+		ul {
+			list-style-type: none;
+		}
+
+	</style>
+</head>
+<body>
+ <div class="container">
+ 	<div class="row">
+ 	
+		</div>
+ 		<ul class="list-group">
+ 		  <div class="input-group mb-3">
+ 		    <input type="text" class="form-control" placeholder="Add New Todo">
+ 		    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Add</button>
+ 		  </div>
+ 		  <li class="todo__block">
+ 		  	
+ 		  </li>
+		</ul>
+ 		
+ 	</div>
+ 	
+ </div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	let list = []; // 將 todolist 設定為 array
+
+	$(document).ready( () => {
+		$('#button-addon2').on('click', (e) => { // 指向目前發生 click 事件的 button，即 Add
+			if($('.form-control').val() !== '') { // todo 不可是空字串
+				let todo = $('.form-control').val();
+				addTodo(todo);	
+				$('.form-control').val(''); // render 後輸入框清空
+
+			}
+		});
+
+		/* 刪除及完成 todo */
+		
+		$('.todo__block').on('click', (e) => { // 利用事件代理，在父節點處理子節點事件
+			e.preventDefault();
+			if (e.target.className === 'btn btn-danger') {
+				let id = $(e.target).prev().val();	
+				removeTodo(id);
+			} else if (e.target.id === 'done') {
+				completeTodo($(e.target));
+			} else if (e.target.id === 'undone') {
+				uncheckTodo($(e.target));
+			} 
+		});
+
+
+	}); 
+
+	function render () {
+		$('.todo__block').empty(); // 將 todo 清空
+		for (var i=0; i<list.length; i++) {
+			$('.todo__block').append(`
+				<li class="list-group-item">${list[i]}
+		  	  		<div class="list-btn">
+		  	  		    <input class="todo__block__id" type="hidden" value="${i}">
+		  	  			<button type="button" class="btn btn-danger" id="delete">Delete</button>
+  						<button type="button" class="btn btn-success" id="done">Done</button>
+		  	  	    </div>	
+		  	     </li>`
+				);
+		}
+	};
+
+	function addTodo (todo) {
+		list.push(todo);
+		render();
+	}
+
+	function removeTodo (id) {
+		id = Number(id);
+		for (var i=0; i<list.length; i++) {
+			if (i === id) {
+				list.splice(i, 1, '');
+			}
+		}
+		list = list.filter(Boolean); // 神奇的會把空字串去掉的功能
+		render();
+	}
+
+	function completeTodo (target) {
+		target.parent().parent().addClass('list-group-item-success');
+		target.attr('id', 'undone');
+		target.text('Undone');
+		
+	}
+
+	function uncheckTodo (target) {
+		target.parent().parent().removeClass('list-group-item-success');
+		target.attr('id', 'done');
+		target.text('Done');
+	}
+		
+
+
+</script>
+</body>
+</html>
